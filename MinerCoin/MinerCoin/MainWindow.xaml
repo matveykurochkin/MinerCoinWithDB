@@ -1,0 +1,19 @@
+﻿<Window x:Class="MinerCoin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="250" Width="350"
+        Unloaded="Window_Unloaded"  
+        >
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="CheckLogin" Content="Вход" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Height="27" Width="120" Click="CheckLogin_Click"/>
+        <TextBox x:Name="CheckUserName" HorizontalAlignment="Center" Margin="0,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="CheckPassword" HorizontalAlignment="Center" Margin="0,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="RegisterButton" Content="Регистрация" HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" Height="19" Width="120" Click="RegisterButton_Click"/>
+
+    </Grid>
+</Window>
