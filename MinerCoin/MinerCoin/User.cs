@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace MinerCoin
 {
-    public class GameResult
+    public class User
     {
-        public int Scores;
-        public int Bonus;
+        public static int userId = 0;
     }
 }

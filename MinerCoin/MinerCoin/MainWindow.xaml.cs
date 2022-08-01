@@ -5,7 +5,7 @@ namespace MinerCoin
     public partial class MainWindow : Window
     {
         private LoginDB _loginDB = new LoginDB();
-        private int _userId;
+        public int _userId;
         public MainWindow()
         {
             InitializeComponent();
@@ -18,21 +18,44 @@ namespace MinerCoin
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            _loginDB.Register(CheckUserName.Text, CheckPassword.Text);
-            MessageBox.Show("Успех");
-        }
-
-        private void CheckLogin_Click(object sender, RoutedEventArgs e)
-        {           
-            var userId =  _loginDB.Login(CheckUserName.Text, CheckPassword.Text);
-            if (userId > 0)
+            if (CheckUserName.Text != "" && CheckPassword.Text != "")
             {
-                MessageBox.Show("Успех");
-                _userId = userId;
+                _loginDB.Register(CheckUserName.Text, CheckPassword.Text);
+                MessageBox.Show("Регистрация выполнена!",
+                         "Information",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Регистрация не выполненна! Не заполнены необходимые поля!",
+                              "Error",
+                             MessageBoxButton.OK,
+                             MessageBoxImage.Error);
+            }
+        }
+
+        private void CheckLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var userId = _loginDB.Login(CheckUserName.Text, CheckPassword.Text);
+            if (userId > 0)
+            {
+                MessageBox.Show("Вход выполнен!",
+                    "Information",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                User.userId = userId;
+
+                Game newGame = new Game();
+                newGame.Show();
+            }
+            else
+            {
+                MessageBox.Show("Вход не выполнен! Проверьте правильность ввода данных или зарегестрируйтесь!",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                RegisterButton.Visibility = Visibility.Visible;
             }
         }
     }

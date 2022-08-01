@@ -23,9 +23,64 @@ namespace MinerCoin
             _cn.Open();
         }
 
+        internal void delete(int userId)
+        {
+            EnsureConnected();
+            using (var cmd = _cn.CreateCommand())
+            {
+                cmd.CommandText = @"DELETE ResultGame
+                                        WHERE UserId = @userId";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("UserId", userId);
+                var dataReader = cmd.ExecuteNonQuery();
+            }
+        }
+
+        internal int LoadResultGame(int userId)
+        {
+            EnsureConnected();
+            using (var cmd = _cn.CreateCommand())
+            {
+                cmd.CommandText = @"SELECT Scores
+                                        FROM ResultGame
+                                        WHERE UserId = @userId;";
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.AddWithValue("UserId", userId);
+
+
+                using (var dataReader = cmd.ExecuteReader())
+                {
+                    if (dataReader.Read())
+                    {
+                        var scores = Convert.ToInt32(dataReader["Scores"]);
+                        return scores;
+                    }
+                }
+                return -1;
+            }
+        }
+
         internal void SaveGameResult(int userId, GameResult gameResult)
         {
+            EnsureConnected();
+            using (var cmd = _cn.CreateCommand())
+            {
+                cmd.CommandText = @"INSERT INTO [dbo].[ResultGame]
+                                           (
+                                            [UserId]
+                                           ,[Scores])
+                                    VALUES
+                                           (
+                                            @UserId
+                                           ,@Scores)";
 
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.AddWithValue("UserId", userId);
+                cmd.Parameters.AddWithValue("Scores", gameResult.Scores);
+                var dataReader = cmd.ExecuteNonQuery();
+            }
         }
 
         internal int Login(string userName, string userPassword)
@@ -47,7 +102,6 @@ namespace MinerCoin
                         return userId;
                     }
                 }
-
                 return -1;
             }
         }
