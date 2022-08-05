@@ -10,5 +10,6 @@ namespace MinerCoin
     {
         public int Scores;
         public int Bonus;
+        public int Red,Green, Blue;
     }
 }

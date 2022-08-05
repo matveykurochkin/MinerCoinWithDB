@@ -5,7 +5,6 @@ namespace MinerCoin
     public partial class MainWindow : Window
     {
         private LoginDB _loginDB = new LoginDB();
-        public int _userId;
         public MainWindow()
         {
             InitializeComponent();
@@ -20,15 +19,26 @@ namespace MinerCoin
         {
             if (CheckUserName.Text != "" && CheckPassword.Text != "")
             {
-                _loginDB.Register(CheckUserName.Text, CheckPassword.Text);
-                MessageBox.Show("Регистрация выполнена!",
-                         "Information",
-                         MessageBoxButton.OK,
-                         MessageBoxImage.Information);
+                if (_loginDB.CheckUserNameInDB(CheckUserName.Text))
+                {
+                    MessageBox.Show("Регистрация не выполнена! Имя пользователя уже занято!",
+                                  "Error",
+                                 MessageBoxButton.OK,
+                                 MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    _loginDB.Register(CheckUserName.Text, CheckPassword.Text);
+                    MessageBox.Show("Регистрация выполнена!",
+                             "Information",
+                             MessageBoxButton.OK,
+                             MessageBoxImage.Information);
+                }
             }
             else
             {
-                MessageBox.Show("Регистрация не выполненна! Не заполнены необходимые поля!",
+                MessageBox.Show("Регистрация не выполнена! Не заполнены необходимые поля!",
                               "Error",
                              MessageBoxButton.OK,
                              MessageBoxImage.Error);

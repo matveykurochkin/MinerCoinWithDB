@@ -5,25 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinerCoin"
         mc:Ignorable="d"
-        Title="Game" Height="250" Width="350"
+        Title="MainCoinGame" Height="260" Width="350"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
-        <Button Content="Mine" HorizontalAlignment="Center" Margin="0,113,0,0" VerticalAlignment="Top" Height="70" Width="156" Click="Button_Click">
+        <Button Content="Mine" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="96" Width="165" Click="Button_Click" Background="Aqua">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="9"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="ResultBox" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Height="98" FontSize="36">
+        <TextBox x:Name="ResultBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" FontSize="36">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="9"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="19,130,0,0" VerticalAlignment="Top" Height="36" Width="62" Click="SaveButton_Click">
+        <Button x:Name="FirstBonusButton" Content="+2 (10)" Margin="189,121,16,0" VerticalAlignment="Top" Height="42" Click="FirstBonusButton_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="ThemeButton" Content="Change theme (10)" Margin="189,175,16,0" VerticalAlignment="Top" Height="42" Click="ThemeButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="9"/>
