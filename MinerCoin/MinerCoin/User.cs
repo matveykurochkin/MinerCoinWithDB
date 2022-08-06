@@ -8,6 +8,7 @@ namespace MinerCoin
 {
     public class User
     {
+        public static string Name = "";
         public static int userId = 0;
     }
 }

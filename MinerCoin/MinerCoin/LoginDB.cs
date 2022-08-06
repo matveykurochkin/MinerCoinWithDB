@@ -23,7 +23,7 @@ namespace MinerCoin
             _cn.Open();
         }
 
-        internal void delete(int userId)
+        internal void deleteResult(int userId)
         {
             EnsureConnected();
             using (var cmd = _cn.CreateCommand())
@@ -127,12 +127,13 @@ namespace MinerCoin
                 var dataReader = cmd.ExecuteNonQuery();
             }
         }
-        internal int LoadThemeR(int userId)
+        internal int[] LoadTheme(int userId)
         {
             EnsureConnected();
+            int[] colorArr = new int[] {123,122,155};
             using (var cmd = _cn.CreateCommand())
             {
-                cmd.CommandText = @"SELECT Red
+                cmd.CommandText = @"SELECT Red, Green, Blue
                                         FROM UserTheme
                                         WHERE UserId = @userId;";
                 cmd.CommandType = CommandType.Text;
@@ -141,53 +142,29 @@ namespace MinerCoin
                 {
                     if (dataReader.Read())
                     {
-                        var userBonus = Convert.ToInt32(dataReader["Red"]);
-                        return userBonus;
+                        var ColorRed = Convert.ToInt32(dataReader["Red"]);
+                        var ColorGreen = Convert.ToInt32(dataReader["Green"]);
+                        var ColorBlue = Convert.ToInt32(dataReader["Blue"]);
+                        colorArr[0] = ColorRed;
+                        colorArr[1] = ColorGreen;
+                        colorArr[2] = ColorBlue;
+                        return colorArr;
                     }
                 }
-                return 0;
+                return colorArr;
             }
         }
-        internal int LoadThemeG(int userId)
+
+        internal void deleteAccount(int userId)
         {
             EnsureConnected();
             using (var cmd = _cn.CreateCommand())
             {
-                cmd.CommandText = @"SELECT Green
-                                        FROM UserTheme
-                                        WHERE UserId = @userId;";
+                cmd.CommandText = @"DELETE UserInfo
+                                        WHERE UserId = @userId";
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("UserId", userId);
-                using (var dataReader = cmd.ExecuteReader())
-                {
-                    if (dataReader.Read())
-                    {
-                        var userBonus = Convert.ToInt32(dataReader["Green"]);
-                        return userBonus;
-                    }
-                }
-                return 0;
-            }
-        }
-        internal int LoadThemeB(int userId)
-        {
-            EnsureConnected();
-            using (var cmd = _cn.CreateCommand())
-            {
-                cmd.CommandText = @"SELECT Blue
-                                        FROM UserTheme
-                                        WHERE UserId = @userId;";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("UserId", userId);
-                using (var dataReader = cmd.ExecuteReader())
-                {
-                    if (dataReader.Read())
-                    {
-                        var userBonus = Convert.ToInt32(dataReader["Blue"]);
-                        return userBonus;
-                    }
-                }
-                return 0;
+                var dataReader = cmd.ExecuteNonQuery();
             }
         }
 

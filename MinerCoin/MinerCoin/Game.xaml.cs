@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace MinerCoin
 {
@@ -25,21 +16,20 @@ namespace MinerCoin
             InitializeComponent();
             ResultBox.Text += _loginDB.LoadResultGame(User.userId);
 
-            var ThemeR = _loginDB.LoadThemeR(User.userId);
-            var ThemeG = _loginDB.LoadThemeG(User.userId);
-            var ThemeB = _loginDB.LoadThemeB(User.userId);
-            if (ThemeR > -1 && ThemeG > -1 && ThemeR > -1)
+            var Theme = _loginDB.LoadTheme(User.userId);
+            var Red = Convert.ToByte(Theme[0]);
+            var Green = Convert.ToByte(Theme[1]);
+            var Blue = Convert.ToByte(Theme[2]);
+            Background = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
+            if (UserInfo.isDelete)
             {
-                var Red = Convert.ToByte(ThemeR);
-                var Green = Convert.ToByte(ThemeG);
-                var Blue = Convert.ToByte(ThemeB);
-                Background = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
+                Close();
             }
         }
 
         private void Save()
         {
-            _loginDB.delete(User.userId);
+            _loginDB.deleteResult(User.userId);
             _loginDB.SaveGameResult(User.userId, gameResult);
             _loginDB.deleteBonus(User.userId);
             _loginDB.SaveBonus(User.userId, gameResult);
@@ -53,7 +43,7 @@ namespace MinerCoin
             var bonus = _loginDB.LoadBonuses(User.userId);
             ResultBox.Clear();
             ResultBox.Text += counter++ + result + bonus;
-            gameResult.Scores = Convert.ToInt16(ResultBox.Text);
+            gameResult.Scores = Convert.ToInt64(ResultBox.Text);
             gameResult.Bonus = bonus;
             Save();
 
@@ -64,12 +54,12 @@ namespace MinerCoin
             var result = _loginDB.LoadResultGame(User.userId);
             var bonus = _loginDB.LoadBonuses(User.userId);
 
-            if (result >= 10)
+            if (result >= 100)
             {
                 bonus += 2;
                 ResultBox.Clear();
-                ResultBox.Text += counter + result - 11;
-                gameResult.Scores = Convert.ToInt16(ResultBox.Text);
+                ResultBox.Text += counter + result - 101;
+                gameResult.Scores = Convert.ToInt64(ResultBox.Text);
                 gameResult.Bonus = bonus;
                 Save();
             }
@@ -84,15 +74,15 @@ namespace MinerCoin
         {
             var result = _loginDB.LoadResultGame(User.userId);
             var bonus = _loginDB.LoadBonuses(User.userId);
-            if (result >= 10)
+            if (result >= 50)
             {
                 var Red = Convert.ToByte(rndColor.Next(0, 255));
                 var Green = Convert.ToByte(rndColor.Next(0, 255));
                 var Blue = Convert.ToByte(rndColor.Next(0, 255));
                 Background = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
                 ResultBox.Clear();
-                ResultBox.Text += counter + result - 11;
-                gameResult.Scores = Convert.ToInt16(ResultBox.Text);
+                ResultBox.Text += counter + result - 51;
+                gameResult.Scores = Convert.ToInt64(ResultBox.Text);
                 gameResult.Red = Red;
                 gameResult.Green = Green;
                 gameResult.Blue = Blue;
@@ -106,6 +96,12 @@ namespace MinerCoin
                 ResultBox.Clear();
                 ResultBox.Text += "Не хватает Coin!";
             }
+        }
+
+        private void AccountInformation_Click(object sender, RoutedEventArgs e)
+        {
+            UserInfo info = new UserInfo();
+            info.Show();
         }
     }
 }

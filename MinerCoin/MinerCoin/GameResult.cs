@@ -8,8 +8,7 @@ namespace MinerCoin
 {
     public class GameResult
     {
-        public int Scores;
-        public int Bonus;
-        public int Red,Green, Blue;
+        public long Scores;
+        public int Red,Green, Blue, Bonus;
     }
 }

@@ -4,45 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MineCoin" Height="250" Width="350" 
+        Title="MineCoinLogin" Height="250" Width="350" 
         Unloaded="Window_Unloaded"
         WindowStartupLocation="CenterScreen"
-        Background = "AliceBlue"
-        >
+        Background = "AliceBlue">
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Button x:Name="CheckLogin" Content="Login" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Height="27" Width="176" Click="CheckLogin_Click" FontFamily="Kristen ITC" Background="#ae13d0" >
+        <Button x:Name="CheckLogin" Content="Login" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Height="27" Width="176" Click="CheckLogin_Click" FontFamily="Kristen ITC" Background="#ae13d0" FontSize="18" >
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="CheckUserName" Margin="165,56,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="15" FontFamily="Kristen ITC">
+        <TextBox x:Name="CheckUserName" Margin="165,56,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="16" FontFamily="Kristen ITC">
             <TextBox.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="CheckPassword" Margin="165,91,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="15" FontFamily="Kristen ITC">
+        <TextBox x:Name="CheckPassword" Margin="165,91,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="16" FontFamily="Kristen ITC">
             <TextBox.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Button x:Name="RegisterButton" Content="Registration" Margin="0,165,0,0" Click="RegisterButton_Click" Visibility="Visible" HorizontalAlignment="Center" Width="176" Height="28" VerticalAlignment="Top" FontFamily="Kristen ITC" Background="#00fcff">
+        <Button x:Name="RegisterButton" Content="Registration" Margin="0,165,0,0" Click="RegisterButton_Click" Visibility="Visible" HorizontalAlignment="Center" Width="176" Height="28" VerticalAlignment="Top" FontFamily="Kristen ITC" Background="#00fcff" FontSize="18">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Your username:" HorizontalAlignment="Left" Margin="45,58,0,0" VerticalAlignment="Top" FontFamily="Kristen ITC"/>
-        <Label Content="Your password: " HorizontalAlignment="Left" Margin="45,89,0,0" VerticalAlignment="Top" FontFamily="Kristen ITC"/>
-        <Label Content="MINE COIN " HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" FontSize="29" FontFamily="Ravie"/>
+        <Label Content="Your username:" HorizontalAlignment="Left" Margin="32,56,0,0" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="16"/>
+        <Label Content="Your password: " HorizontalAlignment="Left" Margin="32,88,0,0" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="16"/>
+        <Label Content="MINE COIN " Margin="32,0,20,0" FontSize="40" FontFamily="Ravie" Height="63" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

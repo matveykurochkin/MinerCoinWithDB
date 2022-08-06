@@ -55,7 +55,7 @@ namespace MinerCoin
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 User.userId = userId;
-
+                User.Name = CheckUserName.Text;
                 Game newGame = new Game();
                 newGame.Show();
             }
@@ -65,7 +65,6 @@ namespace MinerCoin
                     "Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                RegisterButton.Visibility = Visibility.Visible;
             }
         }
     }

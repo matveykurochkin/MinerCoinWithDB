@@ -5,35 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinerCoin"
         mc:Ignorable="d"
-        Title="MainCoinGame" Height="260" Width="350"
+        Title="MainCoinGame" Height="320" Width="350"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
-        <Button Content="Mine" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="96" Width="165" Click="Button_Click" Background="Aqua">
+        <Button Content="Mine" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="153" Width="165" Click="Button_Click" Background="Violet" FontFamily="Kristen ITC" FontSize="58">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="20"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="ResultBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" FontSize="36">
+        <TextBox x:Name="ResultBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" FontSize="36" FontFamily="Kristen ITC">
             <TextBox.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Button x:Name="FirstBonusButton" Content="+2 (10)" Margin="189,121,16,0" VerticalAlignment="Top" Height="42" Click="FirstBonusButton_Click">
+        <Button x:Name="FirstBonusButton" Content="+2 (100)" Margin="189,121,10,0" Click="FirstBonusButton_Click" FontFamily="Kristen ITC" FontSize="24" Height="42" VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="ThemeButton" Content="Change theme (10)" Margin="189,175,16,0" VerticalAlignment="Top" Height="42" Click="ThemeButton_Click">
+        <Button x:Name="ThemeButton" Content="Change theme (50)" Margin="189,176,10,0" Click="ThemeButton_Click" FontFamily="Kristen ITC" FontSize="14" Height="42" VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="9"/>
+                    <Setter Property="CornerRadius" Value="14"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="AccountInformation" Content="Account Info" Margin="189,232,10,0" VerticalAlignment="Top" Height="42" FontFamily="Kristen ITC" FontSize="18" Click="AccountInformation_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="14"/>
                 </Style>
             </Button.Resources>
         </Button>
