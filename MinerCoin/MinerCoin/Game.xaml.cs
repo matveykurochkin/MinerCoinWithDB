@@ -11,10 +11,13 @@ namespace MinerCoin
         private LoginDB _loginDB = new LoginDB();
         private int counter = 1;
         Random rndColor = new Random();
+
+        private ResultBoxModel _model = new ResultBoxModel();
+
         public Game()
         {
             InitializeComponent();
-            ResultBox.Text += _loginDB.LoadResultGame(User.userId);
+            _model.Result += _loginDB.LoadResultGame(User.userId);
 
             var Theme = _loginDB.LoadTheme(User.userId);
             var Red = Convert.ToByte(Theme[0]);
@@ -25,14 +28,13 @@ namespace MinerCoin
             {
                 Close();
             }
+
+            this.DataContext = _model;
         }
 
         private void Save()
         {
-            _loginDB.deleteResult(User.userId);
             _loginDB.SaveGameResult(User.userId, gameResult);
-            _loginDB.deleteBonus(User.userId);
-            _loginDB.SaveBonus(User.userId, gameResult);
             gameResult.Scores = 0;
             counter = 1;
         }
@@ -41,9 +43,9 @@ namespace MinerCoin
         {
             var result = _loginDB.LoadResultGame(User.userId);
             var bonus = _loginDB.LoadBonuses(User.userId);
-            ResultBox.Clear();
-            ResultBox.Text += counter++ + result + bonus;
-            gameResult.Scores = Convert.ToInt64(ResultBox.Text);
+            _model.Result = 0;
+            _model.Result += counter++ + result + bonus;
+            gameResult.Scores = _model.Result;
             gameResult.Bonus = bonus;
             Save();
 
@@ -57,9 +59,9 @@ namespace MinerCoin
             if (result >= 100)
             {
                 bonus += 2;
-                ResultBox.Clear();
-                ResultBox.Text += counter + result - 101;
-                gameResult.Scores = Convert.ToInt64(ResultBox.Text);
+                _model.Result = 0;
+                _model.Result += counter + result - 101;
+                gameResult.Scores = _model.Result;
                 gameResult.Bonus = bonus;
                 Save();
             }
@@ -80,9 +82,9 @@ namespace MinerCoin
                 var Green = Convert.ToByte(rndColor.Next(0, 255));
                 var Blue = Convert.ToByte(rndColor.Next(0, 255));
                 Background = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
-                ResultBox.Clear();
-                ResultBox.Text += counter + result - 51;
-                gameResult.Scores = Convert.ToInt64(ResultBox.Text);
+                _model.Result = 0;
+                _model.Result += counter + result - 51;
+                gameResult.Scores = _model.Result;
                 gameResult.Red = Red;
                 gameResult.Green = Green;
                 gameResult.Blue = Blue;

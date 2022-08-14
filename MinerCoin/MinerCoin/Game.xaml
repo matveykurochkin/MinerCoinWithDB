@@ -16,7 +16,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="ResultBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" FontSize="36" FontFamily="Kristen ITC">
+        <TextBox x:Name="ResultBox" Text="{Binding Result}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" FontSize="36" FontFamily="Kristen ITC">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="14"/>

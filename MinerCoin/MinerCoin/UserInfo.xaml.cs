@@ -36,9 +36,6 @@ namespace MinerCoin
             if (deleteAcc == MessageBoxResult.Yes)
             {
                 _loginDB.deleteAccount(User.userId);
-                _loginDB.deleteBonus(User.userId);
-                _loginDB.deleteTheme(User.userId);
-                _loginDB.deleteResult(User.userId);
                 MessageBox.Show("Удаление заершено!",
                 "Delete completed",
                 MessageBoxButton.OK,

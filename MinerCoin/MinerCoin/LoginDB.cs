@@ -23,31 +23,7 @@ namespace MinerCoin
             _cn.Open();
         }
 
-        internal void deleteResult(int userId)
-        {
-            EnsureConnected();
-            using (var cmd = _cn.CreateCommand())
-            {
-                cmd.CommandText = @"DELETE ResultGame
-                                        WHERE UserId = @userId";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("UserId", userId);
-                var dataReader = cmd.ExecuteNonQuery();
-            }
-        }
-
-        internal void deleteBonus(int userId)
-        {
-            EnsureConnected();
-            using (var cmd = _cn.CreateCommand())
-            {
-                cmd.CommandText = @"DELETE UserBonuses
-                                        WHERE UserId = @userId";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("UserId", userId);
-                var dataReader = cmd.ExecuteNonQuery();
-            }
-        }
+     
         internal int LoadResultGame(int userId)
         {
             EnsureConnected();
@@ -72,24 +48,35 @@ namespace MinerCoin
                 return 0;
             }
         }   
-        internal void SaveBonus(int userId, GameResult gameResult)
+        internal void SaveGameResult(int userId, GameResult gameResult)
         {
             EnsureConnected();
             using (var cmd = _cn.CreateCommand())
             {
-                cmd.CommandText = @"INSERT INTO [dbo].[UserBonuses]
-                                           (
-                                            [UserId]
-                                           ,[UserBonuses])
-                                    VALUES
-                                           (
-                                            @UserId
-                                           ,@UserBonuses)";
+                cmd.CommandText = @"
+                        MERGE INTO UserBonuses AS tgt  
+                        USING (SELECT @UserId as UserId, @Bonus as Bonus) as src 
+                        ON tgt.UserId = src.UserId
+                        WHEN MATCHED
+                            THEN UPDATE SET UserBonuses = src.Bonus                 
+                        WHEN NOT MATCHED BY TARGET THEN 
+                        INSERT (UserId, UserBonuses) VALUES (src.UserId, src.Bonus);
+	
+
+                        MERGE INTO ResultGame AS tgt  
+                        USING (SELECT @UserId as UserId, @Scores as Scores) as src 
+                        ON tgt.UserId = src.UserId
+                        WHEN MATCHED
+                            THEN UPDATE SET Scores = src.Scores                 
+                        WHEN NOT MATCHED BY TARGET THEN 
+                        INSERT (UserId, Scores) VALUES (src.UserId, src.Scores);
+";
 
                 cmd.CommandType = CommandType.Text;
 
                 cmd.Parameters.AddWithValue("UserId", userId);
-                cmd.Parameters.AddWithValue("UserBonuses", gameResult.Bonus);
+                cmd.Parameters.AddWithValue("Bonus", gameResult.Bonus);
+                cmd.Parameters.AddWithValue("Scores", gameResult.Scores);
                 var dataReader = cmd.ExecuteNonQuery();
             }
         }
@@ -190,28 +177,6 @@ namespace MinerCoin
                     }
                 }
                 return 0;
-            }
-        }
-
-        internal void SaveGameResult(int userId, GameResult gameResult)
-        {
-            EnsureConnected();
-            using (var cmd = _cn.CreateCommand())
-            {
-                cmd.CommandText = @"INSERT INTO [dbo].[ResultGame]
-                                           (
-                                            [UserId]
-                                           ,[Scores])
-                                    VALUES
-                                           (
-                                            @UserId
-                                           ,@Scores)";
-
-                cmd.CommandType = CommandType.Text;
-
-                cmd.Parameters.AddWithValue("UserId", userId);
-                cmd.Parameters.AddWithValue("Scores", gameResult.Scores);
-                var dataReader = cmd.ExecuteNonQuery();
             }
         }
 

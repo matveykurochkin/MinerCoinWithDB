@@ -18,7 +18,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="CheckUserName" Margin="165,56,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="16" FontFamily="Kristen ITC">
+        <TextBox x:Name="CheckUserName" Margin="165,56,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" FontSize="16" FontFamily="Kristen ITC" >
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="14"/>

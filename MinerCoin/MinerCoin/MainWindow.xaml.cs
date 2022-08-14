@@ -17,7 +17,7 @@ namespace MinerCoin
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckUserName.Text != "" && CheckPassword.Text != "")
+            if (!string.IsNullOrEmpty(CheckUserName.Text) && !string.IsNullOrEmpty(CheckPassword.Text))
             {
                 if (_loginDB.CheckUserNameInDB(CheckUserName.Text))
                 {
