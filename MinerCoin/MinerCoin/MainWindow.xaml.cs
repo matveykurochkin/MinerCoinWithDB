@@ -17,6 +17,7 @@ namespace MinerCoin
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            var userId = _loginDB.Login(CheckUserName.Text, CheckPassword.Text);
             if (!string.IsNullOrEmpty(CheckUserName.Text) && !string.IsNullOrEmpty(CheckPassword.Text))
             {
                 if (_loginDB.CheckUserNameInDB(CheckUserName.Text))
@@ -34,6 +35,10 @@ namespace MinerCoin
                              "Information",
                              MessageBoxButton.OK,
                              MessageBoxImage.Information);
+                    User.userId = userId;
+                    User.Name = CheckUserName.Text;
+                    Game newGame = new Game();
+                    newGame.Show();
                 }
             }
             else
@@ -50,10 +55,6 @@ namespace MinerCoin
             var userId = _loginDB.Login(CheckUserName.Text, CheckPassword.Text);
             if (userId > 0)
             {
-                MessageBox.Show("Вход выполнен!",
-                    "Information",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
                 User.userId = userId;
                 User.Name = CheckUserName.Text;
                 Game newGame = new Game();
